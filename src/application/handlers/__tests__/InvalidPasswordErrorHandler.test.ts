@@ -1,8 +1,6 @@
-import { BadRequestError } from '../../../domain/errors'
 import { errorMessages } from '../../../domain/errors/ErrorMessages'
 import { InvalidPasswordError } from '../../../domain/errors/InvalidPasswordError'
 import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
-import { BadRequestErrorHandler } from '../BadRequestErrorHandler'
 import { InvalidPasswordErrorHandler } from '../InvalidPasswordErrorHandler'
 
 describe('InvalidPasswordErrorHandler', () => {
