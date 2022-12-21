@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./BadRequestErrorHandler"), exports);
 __exportStar(require("./NotFoundErrorHandler"), exports);
+__exportStar(require("./InvalidPasswordErrorHandler"), exports);
