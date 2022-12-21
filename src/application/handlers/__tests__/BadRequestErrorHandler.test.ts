@@ -1,4 +1,5 @@
 import { BadRequestError } from '../../../domain/errors'
+import { errorMessages } from '../../../domain/errors/ErrorMessages'
 import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { BadRequestErrorHandler } from '../BadRequestErrorHandler'
 
@@ -8,7 +9,7 @@ describe('BadRequestErrorHandler', () => {
 
         const handledError = sut.handle(new BadRequestError())
 
-        expect(handledError.message).toBe('Requisição inválida.')
+        expect(handledError.message).toBe(errorMessages.badRequest)
         expect(handledError.statusCode).toBe(HttpStatusCode.BAD_REQUEST)
     })
 
