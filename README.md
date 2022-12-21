@@ -1,18 +1,21 @@
-# Prodap Fabs Simple Error Handler
+# Express Simple Error Handler
 
-Essa biblioteca foi criada a fim de de padronizar e simplificar o tratamento de exceções nos serviços Prodap Fabs. Não é necessário realizar nenhum tipo de configuração prévia para sua execução, porém, o uso do framework [Express](https://www.npmjs.com/package/express) é obrigatório.
+Essa biblioteca foi criada a fim de de padronizar e simplificar o tratamento de exceções em aplicações que utilizam `express`. Não é necessário realizar nenhum tipo de configuração prévia para sua execução, porém, o uso do framework [Express](https://www.npmjs.com/package/express) é obrigatório.
 
 Os objetivos da biblioteca são: facilitar e padronizar o tratamento de exceções e permitir o envio de respostas mais flexíveis para cenários de erro.
 
 ## Índice
 
-1. [Instalação](#instalação)
-2. [Utiilização como objeto](#utilização-como-objeto)
-2. [Utiilização como middleware](#utilização-como-middleware)
-2. [Utiilização](#utilização)
-3. [Erros disponíveis](#erros-disponíveis)
-4. [Erros não tratados](#erros-não-tratados)
-5. [Contribua](#contribua)
+- [Express Simple Error Handler](#express-simple-error-handler)
+  - [Índice](#índice)
+  - [Instalação](#instalação)
+  - [Utilização como objeto](#utilização-como-objeto)
+  - [Utilização como middleware](#utilização-como-middleware)
+  - [Erros disponíveis](#erros-disponíveis)
+    - [BadRequestError](#badrequesterror)
+    - [NotFoundError](#notfounderror)
+  - [Erros não tratados](#erros-não-tratados)
+  - [Contribua](#contribua)
 
 ---
 ## Instalação
@@ -20,7 +23,7 @@ Os objetivos da biblioteca são: facilitar e padronizar o tratamento de exceçõ
 Esta é uma biblioteca do [Node.js](https://nodejs.org/download/release/v12.18.2/) disponível por meio do registro [npm](https://www.npmjs.com/).
 
 ```bash
-$ npm install prodap-fabs-simple-error-handler
+$ npm install express-simple-error-handler
 ```
 
 ## Utilização como objeto
@@ -30,7 +33,7 @@ Para utilizar a biblioteca é necessário importar o objeto `ErrorHandler`. Atra
 Caso o erro capturado seja um [erro tratado pela biblioteca](#erros-disponíveis), será enviada uma resposta com seu respectivo ["HTTP Status Code"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) e uma mensagem, caso o erro não seja identificado pela biblioteca, será enviada uma mensagem de erro interno.
 
     ```js
-    import { ErrorHandler, BadRequestError } from 'prodap-fabs-simple-error-handler'
+    import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
 
     async update(req, res, updateRecord) {
         try {
@@ -65,7 +68,7 @@ Também é possível utilizar a biblioteca como um `middleware`. Para isto, é n
 Para os exemplos que seguirão, será utilizado o seguinte `controller` como referência:
 
     ```js
-    import { ErrorHandler, BadRequestError } from 'prodap-fabs-simple-error-handler'
+    import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
 
     export function recordController(updateRecord) {
         return () => ({
@@ -88,7 +91,7 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
 1. Implementação na rota/`route`:
     ```js
     import express from 'express'
-    import { errorHandlerMiddleware } from 'prodap-fabs-simple-error-handler'
+    import { errorHandlerMiddleware } from 'express-simple-error-handler'
     import { recordController } from './RecordController'
     import { updateRecord } from '../useCase/updateRecord'
 
@@ -101,7 +104,7 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
 2. Implementação no sistema de roteamento/`router`:
     ```js
     import * as express from 'express'
-    import { errorHandlerMiddleware } from 'prodap-fabs-simple-error-handler'
+    import { errorHandlerMiddleware } from 'express-simple-error-handler'
     import { recordController } from './RecordController'
     import { updateRecord } from '../useCase/updateRecord'
 
@@ -117,7 +120,7 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
 3. Implementação na raíz do serviço/`app`:
     ```js
     import express from 'express'
-    import { errorHandlerMiddleware } from 'prodap-fabs-simple-error-handler'
+    import { errorHandlerMiddleware } from 'express-simple-error-handler'
     import { recordController } from './RecordController'
     import { updateRecord } from '../useCase/updateRecord'
 
