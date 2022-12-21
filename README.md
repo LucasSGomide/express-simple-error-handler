@@ -14,6 +14,7 @@ Os objetivos da biblioteca são: facilitar e padronizar o tratamento de exceçõ
   - [Erros disponíveis](#erros-disponíveis)
     - [BadRequestError](#badrequesterror)
     - [NotFoundError](#notfounderror)
+    - [InvalidPasswordError](#invalidpassworderror)
   - [Erros não tratados](#erros-não-tratados)
   - [Contribua](#contribua)
 
@@ -138,13 +139,18 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
 Os erros disponibilizados pela biblioteca possuem por padrão uma mensagem pré definida. Esta mensagem será enviada caso, no momento do lançamento da exceção, não seja definida nenhuma mensagem customizada para o erro.
 ### BadRequestError
 
-- **Mensagem padrão**: "Requisição inválida."
+- **Mensagem padrão**: "Invalid request."
 - **Status Code**: 400
 
 ### NotFoundError
 
-- **Mensagem padrão**: "Registro não encontrado."
+- **Mensagem padrão**: "Resource not found."
 - **Status Code**: 404
+
+### InvalidPasswordError
+
+- **Mensagem padrão**: "Invalid password."
+- **Status Code**: 400
 
 ## Erros não tratados
 
