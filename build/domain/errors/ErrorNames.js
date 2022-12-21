@@ -5,5 +5,5 @@ var ErrorNames;
 (function (ErrorNames) {
     ErrorNames["BAD_REQUEST"] = "BAD_REQUEST";
     ErrorNames["NOT_FOUND"] = "NOT_FOUND";
-    ErrorNames["INVALID_PASSWORD"] = "NOT_FOUND";
+    ErrorNames["INVALID_PASSWORD"] = "INVALID_PASSWORD";
 })(ErrorNames = exports.ErrorNames || (exports.ErrorNames = {}));
