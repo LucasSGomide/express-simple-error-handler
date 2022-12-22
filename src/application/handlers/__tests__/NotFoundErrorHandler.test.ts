@@ -4,7 +4,7 @@ import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { NotFoundErrorHandler } from '../NotFoundErrorHandler'
 
 describe('NotFoundErrorHandler', () => {
-    it('Deve receber um NotFoundError e retornar status 404 com a mensagem "Registro não encontrado."', () => {
+    it('Deve receber um NotFoundError e retornar status 404 com a mensagem "Resource not found."', () => {
         const sut = new NotFoundErrorHandler()
 
         const handledError = sut.handle(new NotFoundError())
