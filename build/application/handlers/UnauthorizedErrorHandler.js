@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.InvalidPasswordErrorHandler = void 0;
-const InvalidPasswordError_1 = require("../../domain/errors/InvalidPasswordError");
+exports.UnauthorizedErrorHandler = void 0;
+const UnauthorizedError_1 = require("../../domain/errors/UnauthorizedError");
 const HttpStatusCode_1 = require("../../domain/http/HttpStatusCode");
-class InvalidPasswordErrorHandler {
+class UnauthorizedErrorHandler {
     constructor() {
-        this.errorName = new InvalidPasswordError_1.InvalidPasswordError().name;
+        this.errorName = new UnauthorizedError_1.UnauthorizedError().name;
     }
     handle(error) {
         return {
@@ -14,4 +14,4 @@ class InvalidPasswordErrorHandler {
         };
     }
 }
-exports.InvalidPasswordErrorHandler = InvalidPasswordErrorHandler;
+exports.UnauthorizedErrorHandler = UnauthorizedErrorHandler;

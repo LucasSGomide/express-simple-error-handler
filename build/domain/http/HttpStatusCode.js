@@ -7,6 +7,7 @@ var HttpStatusCode;
     HttpStatusCode[HttpStatusCode["CREATED"] = 201] = "CREATED";
     HttpStatusCode[HttpStatusCode["NO_CONTENT"] = 204] = "NO_CONTENT";
     HttpStatusCode[HttpStatusCode["BAD_REQUEST"] = 400] = "BAD_REQUEST";
+    HttpStatusCode[HttpStatusCode["UNAUTHORIZED"] = 401] = "UNAUTHORIZED";
     HttpStatusCode[HttpStatusCode["NOT_FOUND"] = 404] = "NOT_FOUND";
     HttpStatusCode[HttpStatusCode["INTERNAL_ERROR"] = 500] = "INTERNAL_ERROR";
 })(HttpStatusCode = exports.HttpStatusCode || (exports.HttpStatusCode = {}));

@@ -17,3 +17,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./BadRequestError"), exports);
 __exportStar(require("./NotFoundError"), exports);
 __exportStar(require("./InvalidPasswordError"), exports);
+__exportStar(require("./UnauthorizedError"), exports);

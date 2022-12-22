@@ -8,6 +8,7 @@ function createErrorHandler() {
         new handlers_1.BadRequestErrorHandler(),
         new handlers_1.NotFoundErrorHandler(),
         new handlers_1.InvalidPasswordErrorHandler(),
+        new handlers_1.UnauthorizedErrorHandler(),
     ]);
 }
 exports.createErrorHandler = createErrorHandler;
