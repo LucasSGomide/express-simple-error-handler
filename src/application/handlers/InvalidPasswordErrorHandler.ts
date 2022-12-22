@@ -8,7 +8,7 @@ export class InvalidPasswordErrorHandler implements IErrorHandler {
     handle(error: Error) {
         return {
             message: error.message,
-            statusCode: HttpStatusCode.BAD_REQUEST,
+            statusCode: HttpStatusCode.UNAUTHORIZED,
         }
     }
 }

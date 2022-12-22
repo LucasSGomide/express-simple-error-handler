@@ -10,7 +10,7 @@ describe('InvalidPasswordErrorHandler', () => {
         const handledError = sut.handle(new InvalidPasswordError())
 
         expect(handledError.message).toBe(errorMessages.invalidPassword)
-        expect(handledError.statusCode).toBe(HttpStatusCode.BAD_REQUEST)
+        expect(handledError.statusCode).toBe(HttpStatusCode.UNAUTHORIZED)
     })
 
     it('Deve receber um BadRequestError e retornar status 400 com mensagem customizada."', () => {
@@ -21,6 +21,6 @@ describe('InvalidPasswordErrorHandler', () => {
         )
 
         expect(handledError.message).toBe('Custom error message.')
-        expect(handledError.statusCode).toBe(HttpStatusCode.BAD_REQUEST)
+        expect(handledError.statusCode).toBe(HttpStatusCode.UNAUTHORIZED)
     })
 })
