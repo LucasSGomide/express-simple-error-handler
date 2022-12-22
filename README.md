@@ -13,8 +13,9 @@ Os objetivos da biblioteca são: facilitar e padronizar o tratamento de exceçõ
   - [Utilização como middleware](#utilização-como-middleware)
   - [Erros disponíveis](#erros-disponíveis)
     - [BadRequestError](#badrequesterror)
-    - [NotFoundError](#notfounderror)
     - [InvalidPasswordError](#invalidpassworderror)
+    - [UnauthorizedError](#unauthorizederror)
+    - [NotFoundError](#notfounderror)
   - [Erros não tratados](#erros-não-tratados)
   - [Contribua](#contribua)
 
@@ -142,15 +143,19 @@ Os erros disponibilizados pela biblioteca possuem por padrão uma mensagem pré 
 - **Mensagem padrão**: "Invalid request."
 - **Status Code**: 400
 
+### InvalidPasswordError
+
+- **Mensagem padrão**: "Invalid password."
+- **Status Code**: 401
+### UnauthorizedError
+
+- **Mensagem padrão**: "Invalid credentials."
+- **Status Code**: 401
+
 ### NotFoundError
 
 - **Mensagem padrão**: "Resource not found."
 - **Status Code**: 404
-
-### InvalidPasswordError
-
-- **Mensagem padrão**: "Invalid password."
-- **Status Code**: 400
 
 ## Erros não tratados
 
