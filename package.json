@@ -23,8 +23,7 @@
         "test:watch": "jest --watch",
         "husky:init": "husky install",
         "prepare": "npm run build",
-        "build": "tsc -p tsconfig.build.json",
-        "publish": "npm run build && npm publish"
+        "build": "tsc -p tsconfig.build.json"
     },
     "devDependencies": {
         "@types/express": "^4.17.14",
