@@ -5,6 +5,7 @@ import {
     NotFoundError,
     InvalidPasswordError,
     UnauthorizedError,
+    ForbiddenError,
 } from './domain/errors'
 import { ErrorsHandler } from './application/errorHandler/ErrorsHandler'
 import { createErrorHandlerMiddleware } from './config/CreateErrorHandlerMiddleware'
@@ -19,6 +20,7 @@ export {
     NotFoundError,
     InvalidPasswordError,
     UnauthorizedError,
+    ForbiddenError,
     ErrorsHandler,
     ErrorRequestHandler,
 }
