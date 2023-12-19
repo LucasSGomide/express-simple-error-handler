@@ -4,7 +4,7 @@ import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { BadRequestErrorHandler } from '../BadRequestErrorHandler'
 
 describe('BadRequestErrorHandler', () => {
-    it('Deve receber um NotFoundError e retornar status 400 com a mensagem "Invalid request."', () => {
+    it('Should handle a BadRequestError and return the default status code and message.', () => {
         const sut = new BadRequestErrorHandler()
 
         const handledError = sut.handle(new BadRequestError())
@@ -13,7 +13,7 @@ describe('BadRequestErrorHandler', () => {
         expect(handledError.statusCode).toBe(HttpStatusCode.BAD_REQUEST)
     })
 
-    it('Deve receber um BadRequestError e retornar status 400 com mensagem customizada."', () => {
+    it('Should handle a BadRequestError and return the default status code and a custom message.', () => {
         const sut = new BadRequestErrorHandler()
 
         const handledError = sut.handle(

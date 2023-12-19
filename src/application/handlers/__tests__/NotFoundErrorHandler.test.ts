@@ -4,7 +4,7 @@ import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { NotFoundErrorHandler } from '../NotFoundErrorHandler'
 
 describe('NotFoundErrorHandler', () => {
-    it('Deve receber um NotFoundError e retornar status 404 com a mensagem "Resource not found."', () => {
+    it('Should handle a NotFoundError and return the default status code and message.', () => {
         const sut = new NotFoundErrorHandler()
 
         const handledError = sut.handle(new NotFoundError())
@@ -13,7 +13,7 @@ describe('NotFoundErrorHandler', () => {
         expect(handledError.statusCode).toBe(HttpStatusCode.NOT_FOUND)
     })
 
-    it('Deve receber um NotFoundError e retornar status 404 com mensagem customizada."', () => {
+    it('Should handle a NotFoundError and return the default status code and a custom message.', () => {
         const sut = new NotFoundErrorHandler()
 
         const handledError = sut.handle(

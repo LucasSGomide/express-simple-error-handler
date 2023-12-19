@@ -4,7 +4,7 @@ import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { InvalidPasswordErrorHandler } from '../InvalidPasswordErrorHandler'
 
 describe('InvalidPasswordErrorHandler', () => {
-    it('Deve receber um NotFoundError e retornar status 400 com a mensagem "Invalid password."', () => {
+    it('Should handle a InvalidPasswordError and return the default status code and message.', () => {
         const sut = new InvalidPasswordErrorHandler()
 
         const handledError = sut.handle(new InvalidPasswordError())
@@ -13,7 +13,7 @@ describe('InvalidPasswordErrorHandler', () => {
         expect(handledError.statusCode).toBe(HttpStatusCode.UNAUTHORIZED)
     })
 
-    it('Deve receber um BadRequestError e retornar status 400 com mensagem customizada."', () => {
+    it('Should handle a InvalidPasswordError and return the default status code and a custom message.', () => {
         const sut = new InvalidPasswordErrorHandler()
 
         const handledError = sut.handle(

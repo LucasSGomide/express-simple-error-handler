@@ -4,7 +4,7 @@ import { HttpStatusCode } from '../../../domain/http/HttpStatusCode'
 import { UnauthorizedErrorHandler } from '../UnauthorizedErrorHandler'
 
 describe('UnauthorizedErrorHandler', () => {
-    it('Deve receber um UnauthorizedError e retornar status 401 com a mensagem "Invalid credentials."', () => {
+    it('Should handle a UnauthorizedError and return the default status code and message.', () => {
         const sut = new UnauthorizedErrorHandler()
 
         const handledError = sut.handle(new UnauthorizedError())
@@ -13,7 +13,7 @@ describe('UnauthorizedErrorHandler', () => {
         expect(handledError.statusCode).toBe(HttpStatusCode.UNAUTHORIZED)
     })
 
-    it('Deve receber um UnauthorizedError e retornar status 401 com mensagem customizada."', () => {
+    it('Should handle a UnauthorizedError and return the default status code and a custom message.', () => {
         const sut = new UnauthorizedErrorHandler()
 
         const handledError = sut.handle(
