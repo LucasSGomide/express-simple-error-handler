@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ErrorsHandler = exports.UnauthorizedError = exports.InvalidPasswordError = exports.NotFoundError = exports.BadRequestError = exports.errorHandlerMiddleware = exports.ErrorHandler = void 0;
+exports.ErrorsHandler = exports.ForbiddenError = exports.UnauthorizedError = exports.InvalidPasswordError = exports.NotFoundError = exports.BadRequestError = exports.errorHandlerMiddleware = exports.ErrorHandler = void 0;
 const CreateErrorHandler_1 = require("./config/CreateErrorHandler");
 const errors_1 = require("./domain/errors");
 Object.defineProperty(exports, "BadRequestError", { enumerable: true, get: function () { return errors_1.BadRequestError; } });
 Object.defineProperty(exports, "NotFoundError", { enumerable: true, get: function () { return errors_1.NotFoundError; } });
 Object.defineProperty(exports, "InvalidPasswordError", { enumerable: true, get: function () { return errors_1.InvalidPasswordError; } });
 Object.defineProperty(exports, "UnauthorizedError", { enumerable: true, get: function () { return errors_1.UnauthorizedError; } });
+Object.defineProperty(exports, "ForbiddenError", { enumerable: true, get: function () { return errors_1.ForbiddenError; } });
 const ErrorsHandler_1 = require("./application/errorHandler/ErrorsHandler");
 Object.defineProperty(exports, "ErrorsHandler", { enumerable: true, get: function () { return ErrorsHandler_1.ErrorsHandler; } });
 const CreateErrorHandlerMiddleware_1 = require("./config/CreateErrorHandlerMiddleware");

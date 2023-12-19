@@ -18,3 +18,4 @@ __exportStar(require("./BadRequestErrorHandler"), exports);
 __exportStar(require("./NotFoundErrorHandler"), exports);
 __exportStar(require("./InvalidPasswordErrorHandler"), exports);
 __exportStar(require("./UnauthorizedErrorHandler"), exports);
+__exportStar(require("./ForbiddenErrorHandler"), exports);

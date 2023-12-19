@@ -3,4 +3,5 @@ export declare const errorMessages: {
     notFound: string;
     invalidPassword: string;
     unauthorized: string;
+    forbidden: string;
 };

@@ -7,4 +7,5 @@ var ErrorNames;
     ErrorNames["NOT_FOUND"] = "NOT_FOUND";
     ErrorNames["INVALID_PASSWORD"] = "INVALID_PASSWORD";
     ErrorNames["UNAUTHORIZED"] = "UNAUTHORIZED";
+    ErrorNames["FORBIDDEN"] = "FORBIDDEN";
 })(ErrorNames = exports.ErrorNames || (exports.ErrorNames = {}));
