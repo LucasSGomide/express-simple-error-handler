@@ -16,6 +16,7 @@ Goal: simplify and standardize exception treatment and allow a range of response
     - [BadRequestError](#badrequesterror)
     - [InvalidPasswordError](#invalidpassworderror)
     - [UnauthorizedError](#unauthorizederror)
+    - [ForbiddenError](#forbiddenerror)
     - [NotFoundError](#notfounderror)
   - [Unknown errors](#unknown-errors)
   - [Contribute](#contribute)
@@ -156,6 +157,11 @@ The following errors are available to be thrown. Each error has by default a ["H
 
 - **Default Message**: "Invalid credentials."
 - **Status Code**: 401
+
+### ForbiddenError
+
+- **Default Message**: "Access forbidden."
+- **Status Code**: 403
 
 ### NotFoundError
 
