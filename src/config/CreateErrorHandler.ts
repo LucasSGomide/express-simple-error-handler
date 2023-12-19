@@ -4,6 +4,7 @@ import {
     NotFoundErrorHandler,
     InvalidPasswordErrorHandler,
     UnauthorizedErrorHandler,
+    ForbiddenErrorHandler,
 } from '../application/handlers'
 
 export function createErrorHandler() {
@@ -12,5 +13,6 @@ export function createErrorHandler() {
         new NotFoundErrorHandler(),
         new InvalidPasswordErrorHandler(),
         new UnauthorizedErrorHandler(),
+        new ForbiddenErrorHandler(),
     ])
 }
