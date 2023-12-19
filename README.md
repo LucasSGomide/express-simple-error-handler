@@ -1,38 +1,40 @@
 # Express Simple Error Handler
 
-Essa biblioteca foi criada a fim de de padronizar e simplificar o tratamento de exceções em aplicações que utilizam `express`. Não é necessário realizar nenhum tipo de configuração prévia para sua execução, porém, o uso do framework [Express](https://www.npmjs.com/package/express) é obrigatório.
 
-Os objetivos da biblioteca são: facilitar e padronizar o tratamento de exceções e permitir o envio de respostas mais flexíveis para cenários de erro.
+This library was created to standardize and simplify exception treatment across Express.js applications. There is no extra configuration required before install it, but [Express.js](https://www.npmjs.com/package/express) is mandatory.
 
-## Índice
+Goal: simplify and standardize exception treatment and allow a range of responses on error scenarios.
+
+## Index
 
 - [Express Simple Error Handler](#express-simple-error-handler)
-  - [Índice](#índice)
-  - [Instalação](#instalação)
-  - [Utilização como objeto](#utilização-como-objeto)
-  - [Utilização como middleware](#utilização-como-middleware)
-  - [Erros disponíveis](#erros-disponíveis)
+  - [Index](#index)
+  - [Install](#install)
+  - [Use as an object](#use-as-an-object)
+  - [Use as a middleware](#use-as-a-middleware)
+  - [Available errors](#available-errors)
     - [BadRequestError](#badrequesterror)
     - [InvalidPasswordError](#invalidpassworderror)
     - [UnauthorizedError](#unauthorizederror)
     - [NotFoundError](#notfounderror)
-  - [Erros não tratados](#erros-não-tratados)
-  - [Contribua](#contribua)
+  - [Unknown errors](#unknown-errors)
+  - [Contribute](#contribute)
 
 ---
-## Instalação
+## Install
 
-Esta é uma biblioteca do [Node.js](https://nodejs.org/download/release/v12.18.2/) disponível por meio do registro [npm](https://www.npmjs.com/).
+This is a [Node.js](https://nodejs.org/download/release/v12.18.2/) library and it's available through [npm](https://www.npmjs.com/) registry.
 
 ```bash
 $ npm install express-simple-error-handler
 ```
 
-## Utilização como objeto
+## Use as an object
 
-Para utilizar a biblioteca é necessário importar o objeto `ErrorHandler`. Através do método `execute` deve ser enviado via parâmetro, o erro capturado e o objeto `response` do [Express](https://www.npmjs.com/package/express).
+Errors in your application can be effectively managed through the `execute` method of an `ErrorHandler` object. This method requires two parameters: the caught error and an express `response` object.
 
-Caso o erro capturado seja um [erro tratado pela biblioteca](#erros-disponíveis), será enviada uma resposta com seu respectivo ["HTTP Status Code"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) e uma mensagem, caso o erro não seja identificado pela biblioteca, será enviada uma mensagem de erro interno.
+When the caught error is ["exported from the library"](#available-errors), the `ErrorHandler` will automatically send a default response. This response includes an appropriate ["HTTP Status Code"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and a message specified in the error object. If the caught error is not exported from the library, then a default "internal error" response will be sent.
+
 
     ```js
     import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
@@ -40,7 +42,7 @@ Caso o erro capturado seja um [erro tratado pela biblioteca](#erros-disponíveis
     async update(req, res, updateRecord) {
         try {
             if (!req.body) {
-                throw new BadRequestError('Deve ser enviado um objeto para atualização.')
+                throw new BadRequestError('A record should be sent to update.')
             }
 
             const updatedRecord = await updateRecord.execute(req.body)
@@ -51,23 +53,23 @@ Caso o erro capturado seja um [erro tratado pela biblioteca](#erros-disponíveis
     }
     ```
 
-Dado o exemplo, caso não seja enviado um `body` para a requisição, será enviada uma resposta com ["Status Code 400"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) e o seguinte formato de mensagem:
+In the provided example, if a `body` is missing from the `request`, the `ErrorHandler` will automatically generate a `response` with ["Status Code 400"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) along with the following `JSON` object:
 
     ```json
-    { "message": "Deve ser enviado um objeto para atualização." }
+    { "message": "A record should be sent to update." }
     ```
 
-Caso a execução do caso de uso `updateRecord` lance um erro não tratado, a resposta será enviada com ["Status Code 500"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) e o seguinte formato de mensagem:
+On the other hand, if the `updateRecord` use case throws an unknown error, the `ErrorHandler` will generate a `response` with ["Status Code 500"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) along with the following `JSON` object:
 
     ```json
-    { "message": "Erro interno no servidor." }
+    { "message": "Internal Error." }
     ```
 
-## Utilização como middleware
+## Use as a middleware
 
-Também é possível utilizar a biblioteca como um `middleware`. Para isto, é necessário importar a função `errorHandlerMiddleware` e adicionar sua chamada à uma rota/`route` específica, ou dentro do sistema de roteamento/`router`, ou como middleware utilizado pela própria raíz do serviço/`app`.
+It's also possible to manage errors in the application through an `errorHandlerMiddleware`. There are several implementation options, including calling it within a specific `route`, incorporating it into the routing system (`router`), or placing it at the application root.
 
-Para os exemplos que seguirão, será utilizado o seguinte `controller` como referência:
+The provided examples below demonstrate the implementation of the `errorHandlerMiddleware` with the referenced `controller`:
 
     ```js
     import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
@@ -90,7 +92,9 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
     }
     ```
 
-1. Implementação na rota/`route`:
+Implementations:
+
+1. `Route`:
     ```js
     import express from 'express'
     import { errorHandlerMiddleware } from 'express-simple-error-handler'
@@ -103,7 +107,7 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
     app.patch('/updateRecord', recordController.update, errorHandlerMiddleware)
     app.listen(3000)
     ```
-2. Implementação no sistema de roteamento/`router`:
+2. Routing system (`router`):
     ```js
     import * as express from 'express'
     import { errorHandlerMiddleware } from 'express-simple-error-handler'
@@ -119,7 +123,7 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
         router.use(errorHandlerMiddleware)
     }
     ```
-3. Implementação na raíz do serviço/`app`:
+3. Application root:
     ```js
     import express from 'express'
     import { errorHandlerMiddleware } from 'express-simple-error-handler'
@@ -135,45 +139,46 @@ Para os exemplos que seguirão, será utilizado o seguinte `controller` como ref
     app.listen(3000)
     ```
 
-## Erros disponíveis
+## Available errors
 
-Os erros disponibilizados pela biblioteca possuem por padrão uma mensagem pré definida. Esta mensagem será enviada caso, no momento do lançamento da exceção, não seja definida nenhuma mensagem customizada para o erro.
+The following errors are available to be thrown. Each error has by default a ["HTTP status code"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and a built in message. If a custom message is not specified by the user, then the built in message will be sent along with the status code.
+
 ### BadRequestError
 
-- **Mensagem padrão**: "Invalid request."
+- **Default Message**: "Invalid request."
 - **Status Code**: 400
 
 ### InvalidPasswordError
 
-- **Mensagem padrão**: "Invalid password."
+- **Default Message**: "Invalid password."
 - **Status Code**: 401
 ### UnauthorizedError
 
-- **Mensagem padrão**: "Invalid credentials."
+- **Default Message**: "Invalid credentials."
 - **Status Code**: 401
 
 ### NotFoundError
 
-- **Mensagem padrão**: "Resource not found."
+- **Default Message**: "Resource not found."
 - **Status Code**: 404
 
-## Erros não tratados
+## Unknown errors
 
-Será tratado como "erro interno" **todo erro** que não for disponibilizado pela biblioteca, desta forma, é importante que ao lançar uma exceção conhecida, o erro utilizado seja disponibilizado pela biblioteca.
+**Any error** thrown by the application that is not exported by the library will be considered an "unknown error" and will be handled as an "internal error".
 
-- **Mensagem padrão**: "Erro interno no servidor."
+- **Default Message**: "Internal error."
 - **Status Code**: 500
 
-## Contribua
+## Contribute
 
-Para propor melhorias ou adicionar suporte para novos erros, siga os seguintes passos:
+Feel free to contribute to the library!
 
-1. Implemente a melhoria proposta em uma `branch` seguindo a seguinte nomenclatura:
-    - Para **adição de erro** utilize: `feature/newErrorName-userName`
-    - Para **adição de multiplos erros** utilize: `feature/errors-userName`
-    - Para **proposição de melhoria** utilize: `improvement/methodToBeImproved-userName`
-2. Adicione testes unitários para garantir a cobertura funcionalidade da implementada.
-3. Abra um [Merge Request](https://docs.gitlab.com/ee/user/project/merge_requests/) seguindo a seguinte nomenclatura:
-    - Para **adição de erro** utilize: `Error: newErrorName - userName`
-    - Para **adição de multiplos erros** utilize: `Error: new errors - userName`
-    - Para **proposição de melhoria** utilize: `Improvement: methodToBeImproved - userName`
+For improvement suggestions or new error additions, follow the step by step guide below:
+
+1. Push the improvement code to a `branch` named with the following rule:
+    - **Error adition**: `feature/error-addition-user-name`
+    - **Improvements**: `improvement/user-name`
+2. Don't forget to write unit tests to ensure that the implemented feature or improvement is working as expected.
+3. Open a [Merge Request](https://docs.gitlab.com/ee/user/project/merge_requests/) following the naming rule below:
+    - **Error adition**: `Error: new-error-name(s) - user-name`
+    - **Improvements**: `Improvement: short-improvement-description - user-name`
