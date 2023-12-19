@@ -37,34 +37,34 @@ Errors in your application can be effectively managed through the `execute` meth
 When the caught error is ["exported from the library"](#available-errors), the `ErrorHandler` will automatically send a default response. This response includes an appropriate ["HTTP Status Code"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and a message specified in the error object. If the caught error is not exported from the library, then a default "internal error" response will be sent.
 
 
-    ```js
-    import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
+```js
+import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
 
-    async update(req, res, updateRecord) {
-        try {
-            if (!req.body) {
-                throw new BadRequestError('A record should be sent to update.')
-            }
-
-            const updatedRecord = await updateRecord.execute(req.body)
-            res.status(200).json({ data: updatedRecord })
-        } catch(err) {
-            ErrorHandler.execute(err, res)
+async update(req, res, updateRecord) {
+    try {
+        if (!req.body) {
+            throw new BadRequestError('A record should be sent to update.')
         }
+
+        const updatedRecord = await updateRecord.execute(req.body)
+        res.status(200).json({ data: updatedRecord })
+    } catch(err) {
+        ErrorHandler.execute(err, res)
     }
-    ```
+}
+```
 
 In the provided example, if a `body` is missing from the `request`, the `ErrorHandler` will automatically generate a `response` with ["Status Code 400"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/400) along with the following `JSON` object:
 
-    ```json
-    { "message": "A record should be sent to update." }
-    ```
+```json
+{ "message": "A record should be sent to update." }
+```
 
 On the other hand, if the `updateRecord` use case throws an unknown error, the `ErrorHandler` will generate a `response` with ["Status Code 500"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/500) along with the following `JSON` object:
 
-    ```json
-    { "message": "Internal Error." }
-    ```
+```json
+{ "message": "Internal Error." }
+```
 
 ## Use as a middleware
 
@@ -72,26 +72,26 @@ It's also possible to manage errors in the application through an `errorHandlerM
 
 The provided examples below demonstrate the implementation of the `errorHandlerMiddleware` with the referenced `controller`:
 
-    ```js
-    import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
+```js
+import { ErrorHandler, BadRequestError } from 'express-simple-error-handler'
 
-    export function recordController(updateRecord) {
-        return () => ({
-            async update(req, res, next) {
-                try {
-                    if (!req.body) {
-                        throw new BadRequestError('Deve ser enviado um objeto para atualização.')
-                    }
-
-                    const updatedRecord = await updateRecord.execute(req.body)
-                    res.status(200).json({ data: updatedRecord })
-                } catch(err) {
-                    next(err)
+export function recordController(updateRecord) {
+    return () => ({
+        async update(req, res, next) {
+            try {
+                if (!req.body) {
+                    throw new BadRequestError('Deve ser enviado um objeto para atualização.')
                 }
+
+                const updatedRecord = await updateRecord.execute(req.body)
+                res.status(200).json({ data: updatedRecord })
+            } catch(err) {
+                next(err)
             }
-        })
-    }
-    ```
+        }
+    })
+}
+```
 
 Implementations:
 
